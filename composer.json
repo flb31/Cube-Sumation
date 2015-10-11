@@ -1,0 +1,21 @@
+{
+    "name" : "cube-summation/cube-summation",
+    "description" : "",
+    "type" : "type",
+    "author" : [
+        {
+            "name" : "Fabian Luna",
+            "email" : "flb031@gmail.com",
+            "role" : "Backend Developer"
+        }
+    ],
+    "require" : {
+        "php" : ">=5.3.0"
+    },
+    "autoload" : {
+        "psr-4" : {
+            "Cube\\" : "App/"
+        }
+    }
+    
+}
