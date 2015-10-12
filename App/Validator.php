@@ -4,16 +4,6 @@ use Exception;
 
 class Validator{
     
-    
-    const COMAND_TYPE_T  = 'T';  // T => Total test cases.
-    const COMAND_TYPE_NM = 'NM'; // N M => size cube and total operations
-    const COMAND_TYPE_QU = 'QU'; // QUERY or UPDATE operation
-    
-    const COMMAND_UPDATE = 'UPDATE';
-    const COMMAND_QUERY  = 'QUERY';
-    const TOTAL_NUM_UPDATE = 4;
-    const TOTAL_NUM_QUERY  = 6;
-    
     public function scanCommand($command, $type_command){
         
         try{
@@ -36,17 +26,17 @@ class Validator{
         
         $main_message = 'Comando no válido debe ser de la forma:';
         
-        $comando_query  = self::COMMAND_QUERY . ' x1 y1 z1 x2 y2 z2';
-        $comando_update = self::COMMAND_UPDATE . ' x y z W';
+        $comando_query  = Config::COMMAND_QUERY . ' x1 y1 z1 x2 y2 z2';
+        $comando_update = Config::COMMAND_UPDATE . ' x y z W';
         $message_qu = "$main_message `$comando_query` O `$comando_update`.";
             
         $message_t = "$main_message Numero de tests `T`.";
         $message_nm = "$main_message Dimesión del cubo (N) y total de operaciones (M) => `N M`";
         
         $arr_msg = array (
-                        self::COMAND_TYPE_T => $message_t,
-                        self::COMAND_TYPE_NM => $message_nm,
-                        self::COMAND_TYPE_QU => $message_qu
+                        Config::COMAND_TYPE_T => $message_t,
+                        Config::COMAND_TYPE_NM => $message_nm,
+                        Config::COMAND_TYPE_QU => $message_qu
                     );
         
         return $arr_msg[$type_command];
@@ -58,34 +48,34 @@ class Validator{
         
         switch($type_command){
                 
-            case self::COMAND_TYPE_T:
+            case Config::COMAND_TYPE_T:
                 $pattern = "/^\s*\d+\s*$/";
                 break;
-                
-            case self::COMAND_TYPE_NM:
-                $pattern = "/^(\s*\d\s*){2}$/";
+                 
+            case Config::COMAND_TYPE_NM:
+                $pattern = "/^\s*\d+\s+\d+\s*$/";
                 break;
                 
-            case self::COMAND_TYPE_QU:
+            case Config::COMAND_TYPE_QU:
                 $type = '';
                 $num = '';
-                if(stripos($command, self::COMMAND_QUERY ) !== FALSE ){
-                    $type = self::COMMAND_QUERY;
-                    $num  = self::TOTAL_NUM_QUERY;
-                }else if(stripos($command, self::COMMAND_UPDATE ) !== FALSE){
-                    $type = self::COMMAND_UPDATE;
-                    $num  = self::TOTAL_NUM_UPDATE;    
+                if(stripos($command, Config::COMMAND_QUERY ) !== FALSE ){
+                    $type = Config::COMMAND_QUERY;
+                    $num  = Config::TOTAL_NUM_QUERY;
+                }else if(stripos($command, Config::COMMAND_UPDATE ) !== FALSE){
+                    $type = Config::COMMAND_UPDATE;
+                    $num  = Config::TOTAL_NUM_UPDATE;    
                 }
-                $pattern = "/^\s*" . $type . "(\s+\d){" . $num . "}\s*$/i";
+                $pattern = "/^\s*" . $type . "(\s+\d+){" . $num . "}\s*$/i";
                 
                 break;
                 
             default:
                 throw new Exception('Error de configuración: `' 
                                     . $type_command . '` No es un comando válido. Usar tipo `'
-                                    . self::COMAND_TYPE_T  . '`, `'
-                                    . self::COMAND_TYPE_NM . '`, `'
-                                    . self::COMAND_TYPE_QU
+                                    . Config::COMAND_TYPE_T  . '`, `'
+                                    . Config::COMAND_TYPE_NM . '`, `'
+                                    . Config::COMAND_TYPE_QU
                                    );
                 break;
         }
