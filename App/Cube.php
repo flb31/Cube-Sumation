@@ -14,7 +14,9 @@ class Cube{
         
         try{
             $val = new Validator();
-            $result = $val->scanCommand($command);
+            $result = $val->scanCommand($command, 'T');
+            //$result = $val->scanCommand($command, 'NM');
+            //$result = $val->scanCommand($command, 'QU');
             
             if($result === TRUE)
                 $result = 'Comando válido.';
