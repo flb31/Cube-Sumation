@@ -1,5 +1,7 @@
 $(window).load(function(){
     
+    $.get('process.php?command=reset');
+    
     $("#command").on("keyup", function(event){
         if ( event.which == 13 ){
             var textbox = $("#command");
