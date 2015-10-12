@@ -2,5 +2,7 @@
 
     require_once __DIR__ . '/../vendor/autoload.php';
 
-    echo Cube\Cube::executeCommand($_GET['command']);
+    $cube = new Cube\Cube();
+    echo $cube->executeCommand($_GET['command']);
+    
 ?>
