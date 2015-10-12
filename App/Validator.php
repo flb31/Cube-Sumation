@@ -10,8 +10,11 @@ class Validator{
             
             if( is_null($command) || strlen($command) == 0 ) throw new Exception('');
             
+            $res = $this->specialCommands($command);
+            if ( $res['res'] ) return $res;
+            
             if ( preg_match ( $this->getPattern($sequence, $command) , $command) )
-                return TRUE;
+                return array('res' => TRUE, 'command' => '');
             else{
                 throw new Exception( 
                         $this->getMessageExceptionScan ($sequence)
@@ -20,6 +23,13 @@ class Validator{
         }catch(Exception $e){
             return $e->getMessage();
         }
+    }
+    
+    protected function  specialCommands($command){
+        if( preg_match("/^\s*reset\s*$/i", $command) ) 
+            return array('res' => TRUE, 'command' => Config::COMMAND_RESET );
+        
+        return array('res' => FALSE, 'command' => '');
     }
     
     protected function getMessageExceptionScan($sequence){

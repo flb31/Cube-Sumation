@@ -20,6 +20,10 @@ class Persistence{
     public function print_sess(){
         print_r($_SESSION);
     }
+    
+    public function destroyPersistence(){
+        session_destroy();
+    }
 }
 
 ?>

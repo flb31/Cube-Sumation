@@ -18,6 +18,9 @@ class Config{
     #Cube
     const INIT_VAL_CELLS = 0;
     
+    #Special Command
+    const COMMAND_RESET = 'RESET';
+    
     
     #Values for Policy Class
     const MIN_T = 1;

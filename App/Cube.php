@@ -36,19 +36,23 @@ class Cube{
         $sequence = $this->sequencer->getSequence();
         
         try{
+            $val = new Validator();
+            $result = $val->scanCommand($command, $sequence);
             
-            if( $this->sequencer->isMoreTest() ) {
-                $val = new Validator();
-                $result = $val->scanCommand($command, $sequence);
-
-                if($result !== TRUE)
-                    return $result;
-
+            if ( is_array($result) && $result['command'] == Config::COMMAND_RESET )
+                return $this->resetCube();
+            
+            if( !$this->sequencer->haveMoreTest() )
+                return 'Fin.';
+            
+            if(!is_array($result) ) //Command not valid
+                return $result;            
+            
+            $result = $this->verifyRules($sequence, $command);
+            if($result['res'] === TRUE)
                 $this->sequencer->executeSequence();
-                $result = $this->verifyRules($sequence, $command);
-            
-            }else
-                $result = 'Fin.';
+
+            $result = $result['message'];
             
         }catch(Exception $e ){
             return $e->getMessage();
@@ -57,6 +61,11 @@ class Cube{
         return $result;
     }
     
+    
+    protected function resetCube(){
+        $this->persistence->destroyPersistence();
+        return 'Reiniciado.';
+    }
     
     
     protected function verifyRules($sequence, $command){
@@ -127,10 +136,10 @@ class Cube{
             }
         
         }catch(Exception $e ){
-            return $e->getMessage();
+            return array ( 'res' => FALSE, 'message' => $e->getMessage() );
         }
         
-        return $message;    
+        return array ( 'res' => TRUE, 'message' => $message );
     }
     
     protected function createCube(){

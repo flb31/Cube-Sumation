@@ -105,7 +105,7 @@ class Sequencer{
             $op_num = $this->getOperationsNumber();
             $op_num_idx = $this->getOperationsNumberIndex();
 
-            if(++$op_num_idx < $op_num ){
+            if($op_num_idx++ < $op_num ){
                 $this->setOperationsNumberIndex( $op_num_idx );
             }else{
                 $this->setOperationsNumberIndex( 0 );
@@ -116,7 +116,7 @@ class Sequencer{
         
     }
     
-    public function isMoreTest(){
+    public function haveMoreTest(){
         $test_case = $this->getTestCases();
         $index_case = $this->getTestCasesIndex();
         
