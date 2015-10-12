@@ -1,4 +1,6 @@
-<?php namespace Cube;
+<?php namespace Cube\Helpers;
+
+use Cube\Config\Config;
 
 class Sequencer{
     

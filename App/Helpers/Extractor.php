@@ -1,4 +1,4 @@
-<?php namespace Cube;
+<?php namespace Cube\Helpers;
 
 class Extractor{
     

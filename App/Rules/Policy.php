@@ -1,6 +1,7 @@
-<?php namespace Cube;
+<?php namespace Cube\Rules;
 
 use Exception;
+use Cube\Config\Config;
 
 
 class Policy{
