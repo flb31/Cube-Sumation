@@ -27,6 +27,23 @@ class Policy{
             );
     }
     
+    public function verifyCoord($x1, $y1, $z1, $x2, $y2, $z2){
+        if( $x1 > $x2 )
+            throw new Exception(
+                    "El valor de x1 no puede ser mayor que x2. Valores: x1: $x1, x2: $x2"
+            );
+        
+        if( $y1 > $y2 )
+            throw new Exception(
+                    "El valor de y1 no puede ser mayor que y2. Valores: y1: $y1, y2: $y2"
+            );
+        
+        if( $z1 > $z2 )
+            throw new Exception(
+                    "El valor de z1 no puede ser mayor que z2. Valores: z1: $z1, z2: $z2"
+            );
+    }
+    
     public function verifyPosition($n, $x, $y, $z){
         
         if( !(Config::MIN_N <= $x && $x <= $n) ) 

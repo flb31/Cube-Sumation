@@ -109,6 +109,7 @@ class Cube{
                         
                         $policy->verifyPosition($this->getDimension(), $x1, $y1, $z1);
                         $policy->verifyPosition($this->getDimension(), $x2, $y2, $z2);
+                        $policy->verifyCoord($x1, $y1, $z1, $x2, $y2, $z2);
                         
                         $message = $this->executeCube(Config::COMMAND_QUERY, $x1, $y1, $z1, 0, $x2, $y2, $z2);
                         
