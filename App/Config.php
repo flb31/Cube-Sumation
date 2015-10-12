@@ -4,9 +4,9 @@
 class Config{
     
     #Values for Validator and Extractor Class 
-    const COMAND_TYPE_T  = 'T';  // T => Total test cases.
-    const COMAND_TYPE_NM = 'NM'; // N M => size cube and total operations
-    const COMAND_TYPE_QU = 'QU'; // QUERY or UPDATE operation
+    const SEQUENCE_T  = 'T';  // T => Total test cases.
+    const SEQUENCE_NM = 'NM'; // N M => size cube and total operations
+    const SEQUENCE_QU = 'QU'; // QUERY or UPDATE operation
     
     const COMMAND_UPDATE = 'UPDATE';
     const COMMAND_QUERY  = 'QUERY';

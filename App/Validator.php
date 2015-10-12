@@ -4,17 +4,17 @@ use Exception;
 
 class Validator{
     
-    public function scanCommand($command, $type_command){
+    public function scanCommand($command, $sequence){
         
         try{
             
             if( is_null($command) || strlen($command) == 0 ) throw new Exception('');
             
-            if ( preg_match ( $this->getPattern($type_command, $command) , $command) )
+            if ( preg_match ( $this->getPattern($sequence, $command) , $command) )
                 return TRUE;
             else{
                 throw new Exception( 
-                        $this->getMessageExceptionScan ($type_command)
+                        $this->getMessageExceptionScan ($sequence)
                 );
             }
         }catch(Exception $e){
@@ -22,7 +22,7 @@ class Validator{
         }
     }
     
-    protected function getMessageExceptionScan($type_command){
+    protected function getMessageExceptionScan($sequence){
         
         $main_message = 'Comando no válido debe ser de la forma:';
         
@@ -34,29 +34,29 @@ class Validator{
         $message_nm = "$main_message Dimesión del cubo (N) y total de operaciones (M) => `N M`";
         
         $arr_msg = array (
-                        Config::COMAND_TYPE_T => $message_t,
-                        Config::COMAND_TYPE_NM => $message_nm,
-                        Config::COMAND_TYPE_QU => $message_qu
+                        Config::SEQUENCE_T => $message_t,
+                        Config::SEQUENCE_NM => $message_nm,
+                        Config::SEQUENCE_QU => $message_qu
                     );
         
-        return $arr_msg[$type_command];
+        return $arr_msg[$sequence];
     }
     
-    protected function getPattern($type_command, $command){
+    protected function getPattern($sequence, $command){
         
         $pattern = '';
         
-        switch($type_command){
+        switch($sequence){
                 
-            case Config::COMAND_TYPE_T:
+            case Config::SEQUENCE_T:
                 $pattern = "/^\s*\d+\s*$/";
                 break;
                  
-            case Config::COMAND_TYPE_NM:
+            case Config::SEQUENCE_NM:
                 $pattern = "/^\s*\d+\s+\d+\s*$/";
                 break;
                 
-            case Config::COMAND_TYPE_QU:
+            case Config::SEQUENCE_QU:
                 $type = '';
                 $num = '';
                 if(stripos($command, Config::COMMAND_QUERY ) !== FALSE ){
@@ -72,10 +72,10 @@ class Validator{
                 
             default:
                 throw new Exception('Error de configuración: `' 
-                                    . $type_command . '` No es un comando válido. Usar tipo `'
-                                    . Config::COMAND_TYPE_T  . '`, `'
-                                    . Config::COMAND_TYPE_NM . '`, `'
-                                    . Config::COMAND_TYPE_QU
+                                    . $sequence . '` No es un comando válido. Usar tipo `'
+                                    . Config::SEQUENCE_T  . '`, `'
+                                    . Config::SEQUENCE_NM . '`, `'
+                                    . Config::SEQUENCE_QU
                                    );
                 break;
         }
