@@ -47,9 +47,17 @@ $(window).load(function(){
         $( "#console" ).append( result );
         
         //height console
-        var nro = $("#console > .response").length;
-        var height = parseFloat ( $("#console > .response").css("height") );
-        height = height * nro;
-        $( "#console" ).scrollTop(height);
+        setTimeout(function(){
+            $( "#console" ).scrollTop( getHeight() );
+        }, 150);
+        
+    }
+    
+    function getHeight(){
+        var height = 0;
+        $("#console > .response").each(function(){
+            height += parseFloat ( $(this).css("height") );
+        });
+        return height;
     }
 });
