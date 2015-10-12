@@ -7,22 +7,24 @@ $(window).load(function(){
             
             stop_input_command( textbox );
             
+            __console(command, 'send');
+            
             $.ajax(
                 {
                     url : 'process.php?command='+command,
                     dataType : 'html',
                     statusCode: {
                         404: function() {
-                            __console( "Servidor no encontrado." );
+                            __console( 'Servidor no encontrado.', 'received' );
                         },
                         500: function() {
-                            __console( "Error en el servidor." );
+                            __console( 'Error en el servidor.', 'received' );
                         }
                     }
                 }
             ).done(function(response) {
                 start_input_command( textbox );
-                __console( response );
+                __console( response, 'received' );
             });
         }
         
@@ -38,10 +40,10 @@ $(window).load(function(){
         input.attr("disabled", true);
     }
 
-    function __console(message){
+    function __console(message, type){
         
         //Print response
-        var result = $("<div>").addClass("response").html( message );
+        var result = $("<div>").addClass("response "+type).html( message );
         $( "#console" ).append( result );
         
         //height console

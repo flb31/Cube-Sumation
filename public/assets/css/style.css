@@ -1,13 +1,15 @@
-#command, #console{ margin: 0 auto; font-family: "Droid Sans Mono"; display: block; }
+#options, #options>h4, #options>ul>li, #command, #console{ margin: 0 auto; font-family: "Droid Sans Mono"; display: block; }
+#console, #command, #options { width: 50%; }
 
-#command{ font-size: 13px; width: 50%; height: 30px; border: none; border-bottom: dashed 1px #000; color: green; }
+#options { margin-top: 20px; }
+
+#command{ font-size: 13px; height: 30px; border: none; border-bottom: dashed 1px #000; color: green; }
 #command[disabled="disabled"]{ background: #EEE; color: #FFF; }
 
-#console{ border: 1px solid #000; width: 50%; height: 300px; overflow-y: auto; }
+#console{ border: 1px solid #000; height: 300px; overflow-y: auto; }
 #console > .response{ font-size: 11px; margin: 5px 0 5px 5px; }
-#console > .response:before{ content: '>'; margin-right: 10px; font-weight: bold; }
+#console > .response:before{ content: 'Recibido >'; margin-right: 10px; font-weight: bold; }
+#console > .send:before{ content: 'Enviado >'; }
 
-
-
-
-
+#console > .send { color: #0090BB; }
+#console > .received { color: #FFAA00; }
