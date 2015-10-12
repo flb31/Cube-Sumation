@@ -49,11 +49,11 @@ class Validator{
         switch($sequence){
                 
             case Config::SEQUENCE_T:
-                $pattern = "/^\s*\d+\s*$/";
+                $pattern = "/^\s*-?\d+\s*$/";
                 break;
                  
             case Config::SEQUENCE_NM:
-                $pattern = "/^\s*\d+\s+\d+\s*$/";
+                $pattern = "/^\s*-?\d+\s+-?\d+\s*$/";
                 break;
                 
             case Config::SEQUENCE_QU:
@@ -66,7 +66,7 @@ class Validator{
                     $type = Config::COMMAND_UPDATE;
                     $num  = Config::TOTAL_NUM_UPDATE;    
                 }
-                $pattern = "/^\s*" . $type . "(\s+\d+){" . $num . "}\s*$/i";
+                $pattern = "/^\s*" . $type . "(\s+-?\d+){" . $num . "}\s*$/i";
                 
                 break;
                 
