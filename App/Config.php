@@ -15,6 +15,9 @@ class Config{
     const TOTAL_NUM_UPDATE = 4;
     const TOTAL_NUM_QUERY  = 6;
     
+    #Cube
+    const INIT_VAL_CELLS = 0;
+    
     
     #Values for Policy Class
     const MIN_T = 1;

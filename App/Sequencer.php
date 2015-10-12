@@ -96,26 +96,38 @@ class Sequencer{
     }
     
     
-    public function execute_sequence(){
+    public function executeSequence(){
+        
         $test_case = $this->getTestCases();
         $index_case = $this->getTestCasesIndex();
         
-        if($index_case < $test_case){
-            
+        if($this->getSequence() == Config::SEQUENCE_QU ){
             $op_num = $this->getOperationsNumber();
             $op_num_idx = $this->getOperationsNumberIndex();
-            
-            if($op_num_idx < $op_num ){
-                $this->setOperationsNumberIndex( ++$op_num_idx );
+
+            if(++$op_num_idx < $op_num ){
+                $this->setOperationsNumberIndex( $op_num_idx );
             }else{
+                $this->setOperationsNumberIndex( 0 );
                 $this->setSequence( Config::SEQUENCE_NM );
                 $this->setTestCasesIndex( ++$index_case );
             }
-            
-            return TRUE;
         }
         
-        return FALSE;   
+    }
+    
+    public function isMoreTest(){
+        $test_case = $this->getTestCases();
+        $index_case = $this->getTestCasesIndex();
+        
+        if($this->getSequence() == Config::SEQUENCE_NM && $index_case < $test_case)
+            return TRUE;
+        if($this->getSequence() == Config::SEQUENCE_T)
+            return TRUE;
+        if($this->getSequence() == Config::SEQUENCE_QU && $index_case < $test_case)
+            return TRUE;
+        
+        return FALSE;
     }
     
     
