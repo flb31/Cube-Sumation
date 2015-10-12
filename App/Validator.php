@@ -59,11 +59,11 @@ class Validator{
         switch($type_command){
                 
             case self::COMAND_TYPE_T:
-                $pattern = "/^\s*\d{1,3}\s*$/";
+                $pattern = "/^\s*\d+\s*$/";
                 break;
                 
             case self::COMAND_TYPE_NM:
-                $pattern = "/^(\s*\d{1,3}\s*){2}$/";
+                $pattern = "/^(\s*\d\s*){2}$/";
                 break;
                 
             case self::COMAND_TYPE_QU:
@@ -76,7 +76,7 @@ class Validator{
                     $type = self::COMMAND_UPDATE;
                     $num  = self::TOTAL_NUM_UPDATE;    
                 }
-                $pattern = "/^\s*" . $type . "(\s+\d{1,3}){" . $num . "}\s*$/i";
+                $pattern = "/^\s*" . $type . "(\s+\d){" . $num . "}\s*$/i";
                 
                 break;
                 
