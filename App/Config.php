@@ -7,6 +7,7 @@ class Config{
     const SEQUENCE_T  = 'T';  // T => Total test cases.
     const SEQUENCE_NM = 'NM'; // N M => size cube and total operations
     const SEQUENCE_QU = 'QU'; // QUERY or UPDATE operation
+    const SEQUENCE_DEFAULT = Config::SEQUENCE_T;
     
     const COMMAND_UPDATE = 'UPDATE';
     const COMMAND_QUERY  = 'QUERY';
