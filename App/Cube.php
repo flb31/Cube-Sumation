@@ -42,8 +42,12 @@ class Cube{
             if($result === TRUE)    
                 $result = $this->verifyRules($sequence, $command);
             
-            if($result === TRUE)
-                $result = 'Comando aceptado para ejecutar en el cubo.';
+            if($result === TRUE){
+                if( $this->sequencer->execute_sequence() )
+                    $result = 'Comando aceptado para ejecutar en el cubo.';
+                else
+                    $result = 'Fin.';
+            }
             
         }catch(Exception $e ){
             return $e->getMessage();

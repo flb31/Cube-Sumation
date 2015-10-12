@@ -22,7 +22,7 @@ class Sequencer{
         $this->setOperationsNumber ( $this->persistence->getValue('m') );
         $this->setOperationsNumberIndex( $this->persistence->getValue('m_index') );
         
-        $this->verifySequence();
+        $this->verifyData();
         
     }
     
@@ -65,9 +65,17 @@ class Sequencer{
         $this->persistence->setValue('t_index', $index);
     }
     
-    protected function verifySequence(){
+    protected function verifyData(){
         if( is_null( $this->getSequence() ) || strlen( $this->getSequence() ) == 0 || $this->getSequence() == FALSE)
             $this->setSequence ( Config::SEQUENCE_DEFAULT );
+        
+        
+        if( is_null( $this->getOperationsNumber() ) || strlen( $this->getOperationsNumber() ) == 0 || $this->getOperationsNumber() == FALSE)
+            $this->setOperationsNumber ( 0 );
+        
+        
+        if( is_null( $this->getOperationsNumberIndex() ) || strlen( $this->getOperationsNumberIndex() ) == 0 || $this->getOperationsNumberIndex() == FALSE)
+        $this->setOperationsNumberIndex( 0 );
     }
     
     public function nextSequence(){
@@ -85,6 +93,29 @@ class Sequencer{
     
     public function getSequence(){
         return $this->sequence;
+    }
+    
+    
+    public function execute_sequence(){
+        $test_case = $this->getTestCases();
+        $index_case = $this->getTestCasesIndex();
+        
+        if($index_case < $test_case){
+            
+            $op_num = $this->getOperationsNumber();
+            $op_num_idx = $this->getOperationsNumberIndex();
+            
+            if($op_num_idx < $op_num ){
+                $this->setOperationsNumberIndex( ++$op_num_idx );
+            }else{
+                $this->setSequence( Config::SEQUENCE_NM );
+                $this->setTestCasesIndex( ++$index_case );
+            }
+            
+            return TRUE;
+        }
+        
+        return FALSE;   
     }
     
     
